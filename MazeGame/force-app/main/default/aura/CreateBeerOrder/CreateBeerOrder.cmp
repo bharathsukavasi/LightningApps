@@ -1,0 +1,10 @@
+<aura:component implements="lightning:isUrlAddressable" >
+    <div class="slds-around_small">
+        <lightning:recordForm                              
+                              objectApiName="Beer_Order__c"
+                              layoutType="Full"
+                              columns="2"
+                              mode="edit"
+                              onsubmit="{!c.handleSubmit}" />
+    </div>
+</aura:component>

@@ -1,0 +1,16 @@
+<apex:page controller="SoqlExample1" >
+    <apex:form >
+    <apex:pageBlock title="SoqlResult">
+        <apex:pageBlockButtons location="top"> 
+            <apex:commandButton value="Offset" action="{!getOffset}"/>
+            <apex:commandButton value="Limit" action="{!getLimmit}"/>
+            <apex:commandButton value="All" action="{!getAllData}"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!accs}" var="a">
+            <apex:column value="{!a.name}"/>
+            <apex:column value="{!a.industry}"/> 
+            <apex:column value="{!a.isdeleted}"/>           
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,9 @@
+<aura:component controller="ContactList">
+	<aura:attribute name="contactList" type="Contact[]"></aura:attribute>
+    <aura:handler Name="init" value="{!this}" action="c.doInit"/>
+    <b>Welcome</b>
+    <aura:iteration var="con" items="{!v.contactList}">
+        
+        {!con.Name}<br/>
+    </aura:iteration>
+</aura:component>

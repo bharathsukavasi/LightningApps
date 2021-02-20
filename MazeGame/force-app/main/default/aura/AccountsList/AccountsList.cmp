@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="AccountApexController">
+    <aura:attribute name ="records" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getAccountList}"/>
+    <lightning:layout multipleRows="true">        
+        <aura:iteration items="{!v.records}" var="res">
+            <lightning:layoutItem  size="12" smallDeviceSize="12" mediumDeviceSize="3" LargeDeviceSize="3" padding="around=-small">
+                <c:AccountInfo record="{!res}"/>
+            </lightning:layoutItem>
+        </aura:iteration>
+    </lightning:layout>
+</aura:component>

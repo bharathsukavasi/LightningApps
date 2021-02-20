@@ -1,0 +1,11 @@
+<aura:component controller='ContactControllerClass'>
+    <aura:attribute name="ContactsList" type="account[]"/>
+    
+    <lightning:button label="Call Server" onclick="{!c.getValues}"/>
+
+	 <aura:iteration items="{!v.ContactsList}" var="item">
+      {!item.ID}
+      {!item.Name}
+
+         <b>Heloo Sai</b>
+    </aura:iteration></aura:component>

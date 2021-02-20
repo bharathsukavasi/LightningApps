@@ -1,0 +1,9 @@
+<apex:page controller="ConstructorSample">
+    <apex:form >
+        <apex:outputLabel >Enter Name</apex:outputLabel>
+        <apex:inputText Value="{!Name}"/>
+        <apex:commandButton Value="Click" reRender="One"/>
+        <apex:outputLabel id="One"> Your Name is {!Name}</apex:outputLabel>
+        <apex:commandButton Value="ChangeName" action="{!ChangeName}"/>
+    </apex:form>
+</apex:page>

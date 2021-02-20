@@ -1,0 +1,9 @@
+<aura:component controller="SaveAccountContact" >
+    <aura:registerEvent name="AcntInfo" type="c:AccointInfoEvent"></aura:registerEvent>
+    <lightning:input label="Account Name" type="String" aura:id="aName"/>
+    <lightning:input label="First Name" type="String" aura:id="fName"/>
+    <lightning:input label="Last Name" type="String" aura:id="lName"/>
+    <lightning:input label="Phone" type="String" aura:id="phone"/>
+    <lightning:input label="Rating" type="String" aura:id="rating"/>
+    <lightning:button label="Save" onclick="{!c.SaveAccount}"/>
+</aura:component>

@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+ <lightning:button name="Create component" label="Create component" onclick="{!c.CreateNewComp}"/>
+
+    {!v.body}
+
+</aura:component>

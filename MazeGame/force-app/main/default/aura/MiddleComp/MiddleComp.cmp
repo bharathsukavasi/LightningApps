@@ -1,0 +1,5 @@
+<aura:component >
+	 <aura:handler  event="c:CompEventforpropagation" action="{!c.doHandleinMiddle}" Phase="bubble" />
+
+     <c:BottomComp/>
+</aura:component>

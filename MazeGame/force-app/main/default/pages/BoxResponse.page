@@ -1,0 +1,7 @@
+<apex:page controller="Box_Authorize">
+    <apex:form >
+    <apex:commandButton value="Access Tocken" action="{!requestToken}"/>
+Hi Welcome        {!accessToken}
+ <apex:commandButton value="Create Folder" action="{!create}"/>
+    </apex:form>
+</apex:page>

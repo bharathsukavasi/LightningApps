@@ -1,0 +1,16 @@
+<apex:page controller="ArrayExp1" >
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!myval}" var="a">
+        <apex:column value="{!a}"/>
+        </apex:pageBlockTable> 
+        <apex:outputLabel >{!name}</apex:outputLabel>
+        </apex:pageBlock>
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!myval2}" var="b">
+        <apex:column value="{!b.name}"/>
+        <apex:column value="{!b.industry}"/>
+            </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

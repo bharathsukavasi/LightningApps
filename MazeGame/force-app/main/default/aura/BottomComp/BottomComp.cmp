@@ -1,0 +1,4 @@
+<aura:component >
+    <aura:registerEvent name="CompEventforpropagation" type="c:CompEventforpropagation"/>
+    <lightning:button label="Start Event propagation" onclick="{!c.executeEvent}"/>
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:component controller="SaveAccountContact" >
+	 <aura:handler name="AcntInfo" event="c:AccointInfoEvent" action="{!c.InsertContact}"></aura:handler>
+    <c:CreateNewAccount/>
+</aura:component>

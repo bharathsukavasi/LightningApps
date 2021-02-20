@@ -1,0 +1,7 @@
+<aura:component controller="AccountObjController" >
+    <aura:attribute name="Accountobj" type="Account[]"/>
+    <lightning:button label="Fetch Account Data" onclick="{!c.getaccount}"/>
+    <aura:iteration var="acc" items="{!v.Accountobj}">
+    <p>{!acc.Name}</p>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,17 @@
+<apex:page standardController="Contact" recordSetvar="contacts">
+    <apex:form >
+    <h1>Welcome to the world</h1>
+    <apex:pageblock title="My Contacts">        
+        <apex:pageBlockTable value="{!contacts}" var="item">
+            <apex:column headerValue="ID"> 
+                <apex:outputLink tabindex="tab1" value="TestVFPage">{!item.Id}</apex:outputLink>
+        </apex:column>
+            <apex:column value="{!item.name}"/>            
+            <apex:column value="{!item.createdDate}"/> 
+            <apex:column >
+                <apex:commandButton Value="Open Record" action="/apex/TestVFPage"></apex:commandButton>
+            </apex:column> 
+        </apex:pageBlockTable>
+    </apex:pageblock>
+        </apex:form>
+</apex:page>

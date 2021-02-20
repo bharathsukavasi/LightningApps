@@ -1,0 +1,14 @@
+<apex:page controller="PicklistExp1">
+    <apex:form >
+    <apex:selectList size="1">
+        <apex:selectOption value="{!myOption}">
+        </apex:selectOption>
+    </apex:selectList>
+        <apex:selectList size="1">
+        <apex:selectOption itemLabel="Java" itemValue="java">            
+            </apex:selectOption>
+        <apex:selectOption itemLabel="SFDC" itemValue="SF">            
+            </apex:selectOption>
+        </apex:selectList>
+    </apex:form>
+</apex:page>

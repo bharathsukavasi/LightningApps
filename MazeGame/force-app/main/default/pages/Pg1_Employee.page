@@ -1,0 +1,4 @@
+<apex:page controller="Pg1_Employee">
+    <apex:outputLabel >{!EmployeeNo}</apex:outputLabel>
+    <apex:outputLabel >{!EmployeeName}</apex:outputLabel>
+</apex:page>

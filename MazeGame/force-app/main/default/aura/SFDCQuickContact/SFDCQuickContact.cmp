@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+ <aura:attribute name="CreateContact" type="Contact" default="{
+                                                              sobjectName : 'Contact',
+                                                              FirstName: '',
+                                                              LastName: '',
+                                                              Email:'',
+                                                              Phone:''}"/>
+    <lightning:input type="text" label="First Name" value="{!v.CreateContact.FirstName}" required="true"></lightning:input>
+ <lightning:input type="text" label="LastName" value="{!v.CreateContact.LastName}" required="true"></lightning:input>
+ <lightning:input type="text" label="Email" value="{!v.CreateContact.Email}" required="true"></lightning:input>
+ <lightning:input type="text" label="Phone" value="{!v.CreateContact.Phone}" required="true"></lightning:input>
+      <lightning:button label="Create Contact" variant="brand" onclick="{!c.doRedirect}"/>
+
+</aura:component>

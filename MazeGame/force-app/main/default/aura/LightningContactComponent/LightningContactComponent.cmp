@@ -1,0 +1,32 @@
+<aura:component controller="LightningAccController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="Id" default="0012v00002V2k85AAB"/>
+    <aura:attribute name="AcntID" type="Id" default="0012v00002V2k85AAB"/>
+
+    <aura:attribute name="ContactList" type="Contact[]"/>
+    <lightning:input type="Id" name="AcntID" value="{!v.AcntID}" label="Enter a Acoont Number:"  />
+    Entered Account ID value : <b>{!AcntID}</b> <br/>
+    <aura:handler name="change" value="{!v.AcntID}" action="{!c.itemsChange}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.getContactsDate}"/>
+    <aura:iteration items="{!v.ContactList}" var="con">
+        ContactName={!con.FirstName}<br/>
+    </aura:iteration>
+    
+    <!-- Imports -->
+<!-- Lightning Data Table -->
+    <!-- attributes -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <!-- the container element determine the height of the datatable -->
+    <div style="height: 300px">
+        <lightning:datatable
+                keyField="id"
+                data="{! v.data }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"/>
+    </div>
+</aura:component>

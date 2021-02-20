@@ -1,0 +1,6 @@
+<apex:page controller="Box_Authorize">
+    <apex:form >
+    <apex:commandButton value="Code" action="{!requestCode}"/>
+        
+    </apex:form>
+</apex:page>

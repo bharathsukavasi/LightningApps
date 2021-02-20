@@ -1,0 +1,16 @@
+<aura:component controller='ApplEventApexClass'>
+    <aura:attribute name="search" type="String"/>
+    <aura:registerEvent name="SearchKey" type="c.AccountInfoApplEvent"/>
+    <aura:attribute name="acc" type="Account"/>
+    <div>
+        <lightning:input name="acntSearch" label="Account Name" value="{!v.SearchKey}"/>
+    <lightning:button label="Find" Onclick="{!Search}"/>
+        </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <lightning:input label="Account Name" value="{!v.acc.Name}"/>
+    </div>
+</aura:component>

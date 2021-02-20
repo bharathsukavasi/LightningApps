@@ -1,0 +1,4 @@
+<aura:component >
+	 <aura:handler  event="c:CompEventforpropagation" action="{!c.doHandleinMiddle}" />
+
+</aura:component>
