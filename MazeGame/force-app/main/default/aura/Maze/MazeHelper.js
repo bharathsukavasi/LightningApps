@@ -1,131 +1,117 @@
 ({
-    maze: [],  
-    
-	
-    GenerateMazeFromStringMaze: function (mazePath) {
-        var i;
-        var arr1 = mazePath.split(",");
-        for (i = 0; i < arr1.length; i++) {
+    maze : [],
+	GenerateMazeFromStringMaze : function(mazePath) {
+		var arr1 = mazePath.split(",");
+        for (var i = 0; i < arr1.length; i++) {
             this.maze[i]=arr1[i].split("");
         }
-    },
-    FindShortestPath:function(component, rows, cols, x0,y0,xf,yf){
-        var rows=rows;
-        var cols=cols;
-        var x0=x0;
-        var y0=y0;
-        var xf=xf;
-        var yf=yf;
-        var x=1;
-        var y=2;
-        var matrix=this.maze;
-        var s={x:x0,y:y0};
-        var e={x:xf,y:yf};        
-  		var PathString="";  
-        var point=[];       
-        var List = new Array(); 
-        var visited= [[]];
-        var parent=[[]];
+	},
+    FindMazePath : function(component, rows, cols, sx,sy,ex,ey){
+        var matrix = this.maze;
+        var start = {x:sx,y:sy};
+        var end = {x:ex,y:ey};
+        var pathString = '';
+        var point = {};
+        var visited = [[]];
+        var parent = [[]];
+        var path = [];
+        var queue = [];
         
-        
-        for(var k=0;k<rows;k++)
-        {
-            visited[k]=[];
-            parent[k]=[];
-            
+        // Initialze the rows
+        for(var k=0; k<rows; k++){
+            visited[k] = [];
+            parent[k] = [];
         }
         
-            for (var i = 0; i < rows; i++)
+        // Set default values to the visited and parent matrix
+        for(var i=0; i<rows; i++){
+            for(var j=0; j<cols; j++){
+                visited[i][j] = false;
+                parent[i][j] = null;
+            }
+        }
+        queue.push(start);
+        while(queue.length != 0){
+            var currPath = [];
+            var currCell = queue.shift();
+            visited[currCell.x][currCell.y] = true;
+            
+            if(currCell.x == end.x && currCell.y == end.y){
+                // Path values are added to currPath array from parent 
+                while(parent[currCell.x][currCell.y] != start){
+                    var temp = currCell.x;
+                    currCell.x = parent[currCell.x][currCell.y].x;
+                    currCell.y = parent[temp][currCell.y].y;
+                    
+                    point={};
+                    point.x=currCell.x;
+                    point.y=currCell.y;
+                    currPath.push(point);
+                }                
+                if(currPath.length > 0){
+                    path=[];
+                    path.push(currPath);
+                }
+            }
+            
+            // Traverse right direction
+            if(currCell.y + 1 >= 0){
+                if(currCell.y + 1 < cols && matrix[currCell.x][currCell.y + 1] != 'X' && !visited[currCell.x][currCell.y + 1]){
+                    point={};
+                    point.x=currCell.x;
+                    point.y=currCell.y + 1;
+                    if(!queue.includes(point))
+                    queue.push(point);                    
+                    parent[currCell.x][currCell.y + 1] = currCell;
+                }
+            }
+            
+            // Traverse left direction
+            if(currCell.y - 1 >= 0){
+                if(matrix[currCell.x][currCell.y - 1] != 'X' && !visited[currCell.x][currCell.y - 1]){
+                    point={};
+                    point.x=currCell.x;
+                    point.y=currCell.y - 1;
+                    if(!queue.includes(point))
+                    queue.push(point);                     
+                    parent[currCell.x][currCell.y - 1] = currCell;
+                }
+            }
+            
+            // Traverse up direction
+            if(currCell. x- 1 >= 0){
+                if(matrix[currCell.x - 1][currCell.y] != 'X' && !visited[currCell.x - 1][currCell.y]){
+                    point={};
+                    point.x=currCell.x - 1;
+                    point.y=currCell.y;
+                    if(!queue.includes(point))
+                    queue.push(point);                    
+                    parent[currCell.x - 1][currCell.y] = currCell;
+                }
+            }
+            
+			// Traverse down direction
+            if(currCell.x + 1 >= 0){
+                if(currCell.x + 1 < rows && matrix[currCell.x + 1][currCell.y] != 'X' && !visited[currCell.x + 1][currCell.y]){
+                    point={};
+                    point.x=currCell.x + 1;
+                    point.y=currCell.y;
+                    if(!queue.includes(point))
+                    queue.push(point);                  
+                    parent[currCell.x + 1][currCell.y] = currCell;
+                }
+            }			
+        }
+        // Update PathString
+        if(path.length > 0){
+            for(var i=0;i<path.length;i++)
             {
-                for (var j = 0; j < cols; j++)
+                for(var j=0;j<path[i].length;j++)
                 {
-                    visited[i][j] = false;
-                    parent[i][j] = null;
+                    pathString += path[i][j].x+"_"+path[i][j].y+",";
                 }
-                }
-        var path=[];
-        var q = [];
-        q.push(s);
-                    while (q.length != 0)
-           {
-                var curr=q.shift();
-                 visited[curr.x][curr.y] = true;
-                if (curr.x == e.x && curr.y == e.y)
-                {
-                    var currPath=[] ;
-                    while (parent[curr.x][curr.y] != s)
-                    {
-                        var temp=curr.x;
-                     curr.x = parent[curr.x][curr.y].x;
-                     curr.y = parent[temp][curr.y].y;
-                       
-                    var point={};
-                    point.x=curr.x;
-                    point.y=curr.y;
-                        currPath.push(point);
-                       // Console.Write("({0}, {1}) ", curr.x, curr.y);
-                    }
-                    if (currPath.length < Number.MAX_SAFE_INTEGER)
-                    {
-                        path=[];
-                        path.push(currPath);
-                    }
-                }
-               if((curr.y + 1) >= 0)
-               {
-                if (curr.y + 1 < cols && matrix[curr.x][curr.y + 1] != 'X' && !visited[curr.x][curr.y + 1])
-                {
-                    var point={};
-                    point.x=curr.x;
-                    point.y=curr.y + 1;
-                    q.push(point);
-                    parent[curr.x][curr.y + 1] = curr;
-                }
-               }
-               if((curr.y - 1) >= 0)
-               {
-                if (matrix[curr.x][curr.y - 1] != 'X' && !visited[curr.x][curr.y - 1])
-                {
-                    var point={};
-                    point.x=curr.x;
-                    point.y=curr.y-1;
-                    q.push(point);
-                    parent[curr.x][curr.y - 1] = curr;
-                }
-                   }
-               if((curr.x - 1) >= 0 ){
-                if (matrix[curr.x - 1][curr.y] != 'X' && !visited[curr.x - 1][curr.y])
-                {
-                    var point={};
-                    point.x=curr.x - 1;
-                    point.y=curr.y;
-                    q.push(point);
-                    parent[curr.x - 1][curr.y] = curr;
-                }
-                   }
-               if((curr.x + 1) >= 0)
-               {
-                if (curr.x + 1 < rows && matrix[curr.x + 1][curr.y] != 'X' && !visited[curr.x + 1][curr.y])
-                {
-                    var point={};
-                    point.x=curr.x + 1;
-                    point.y=curr.y;
-                    q.push(point);
-                    parent[curr.x + 1][curr.y] = curr;
-                }
-               }
-                }    
-         
-				for(var i=0;i<path.length;i++)
-				{
-				for(var j=0;j<path[i].length;j++)
-				{
-				PathString += path[i][j].x+"_"+path[i][j].y+",";
-				}
-				}        
-     
-        component.set("v.PathString", PathString); 
-       
-        
+            }            
+        }
+        component.set("v.PathString", pathString);
     }
 })

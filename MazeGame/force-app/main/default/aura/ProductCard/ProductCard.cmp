@@ -1,0 +1,41 @@
+<aura:component  >
+    <aura:attribute name="orderItem" type="Order_Item__c" />
+    <aura:registerEvent name="QuantityChange" type="c:QuantityChange" />
+    <div class="content">
+    	<img src="{!v.orderItem.Product__r.DisplayUrl__c}"
+                 class="product slds-align_absolute-center"
+                 alt="Product picture"
+                 />
+        <p class="title slds-align_absolute-center">
+            {!v.orderItem.Product__r.Name}
+        </p>
+        <p class="slds-align_absolute-center">
+            MSRP:
+            <lightning:formattedNumber
+                value="{!v.orderItem.Product__r.MSRP__c}"
+                style="currency"
+                currencyCode="USD"
+            ></lightning:formattedNumber>
+        </p>
+        <div class="form slds-align_absolute-center">
+        	<lightning:input                
+                value="{!v.orderItem.Quantity__c}"
+                name="Quantity__c"
+                label="Quantity"
+                type="number"
+                max="100"
+                class="quantity"></lightning:input>
+        
+       		<div class="Save">
+                <lightning:buttonIcon 
+               iconName="utility:save" 
+               variant="container" 
+               onclick="{! c.handleFormChange }" 
+               alternativeText="Save" 
+               title="Save"               
+               class="savebutton"/>
+            </div>
+            	
+       </div>
+    </div>
+</aura:component>

@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+<div style=" border: 1px solid #d8dde6;margin: 10px 0 20px 0;">
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="12">
+            <div style="height: 50px;border: solid 1px #ccc;padding: 1rem;">
+                <h2>Header</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</div>	
+
+</aura:component>

@@ -1,0 +1,23 @@
+.slds-card.THIS {
+    background: rgb(243, 242, 242);
+}
+.content.THIS {
+    display: flex;
+    flex-wrap: wrap;
+}
+ .THIS header {
+    padding: 12px 16px;
+    background-color: rgba(194, 51, 53, 1);
+    color: #ffffff;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    display: flex;
+}
+.THIS header .right {
+    flex: 1;
+    text-align: right;
+}
+
+.ordertotal.THIS {
+    margin-left: 4px;
+}

@@ -1,0 +1,37 @@
+<aura:component implements="flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:appHostable,force:lightningQuickAction">
+    <aura:attribute name="activeSections" type="list" />
+    <aura:attribute name="activeSectionsMessage" type="string" />
+    <div class="slds-theme_default slds-p-around_xx-small slds-tabs_card">
+    <lightning:button onclick="{! c.handleExpand }" label="Expand All"/>
+    <lightning:button onclick="{! c.handleCollapse }" label="Collapse All"/>
+    <p>{!v.activeSectionsMessage}</p>
+    
+<lightning:accordion aura:id="accordion"
+        allowMultipleSectionsOpen="true"
+        onsectiontoggle="{! c.handleSectionToggle }"
+        activeSectionName="{! v.activeSections }"
+    >
+        <lightning:accordionSection name="A" label="Accordion Title A">
+                <p>This is the content area for section A.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>The section height expands to fit your content.</p>
+        </lightning:accordionSection>
+        <lightning:accordionSection name="B" label="Accordion Title B">
+                <p>This is the content area for section B.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>The section height expands to fit your content.</p>
+        </lightning:accordionSection>
+        <lightning:accordionSection name="C" label="Accordion Title C">
+                <p>This is the content area for section C.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>The section height expands to fit your content.</p>
+        </lightning:accordionSection>
+    </lightning:accordion> 
+        </div>
+</aura:component>

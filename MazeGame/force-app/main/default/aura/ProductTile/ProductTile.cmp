@@ -1,0 +1,28 @@
+<aura:component  controller="ProductController">    
+    <aura:attribute name="product" type="Product__c" />
+    <aura:attribute name="orderId" type="string" />
+    <aura:registerEvent name="ProductTileClick" type="c:ProductTileClick" />
+    <div class="content">
+        <a onclick="{!c.handleClick}">
+        	<div >
+                <img src="{!v.product.DisplayUrl__c}"
+                     class="product slds-align_absolute-center"
+                    alt="Product picture"/>
+                
+                <div>
+                    <p class="title slds-align_absolute-center">{!v.product.Name}</p>
+                    <p class="slds-align_absolute-center">
+                        MSRP:&nbsp;
+                        <lightning:formattedNumber
+                            style="currency"
+                            currencyCode="USD"
+                            value="{!v.product.MSRP__c}"
+                            class="price"
+                            maximumFractionDigits="2"
+                        ></lightning:formattedNumber>
+                    </p>
+                </div>                
+            </div>
+        </a>
+    </div>
+</aura:component>

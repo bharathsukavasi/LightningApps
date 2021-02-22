@@ -1,0 +1,25 @@
+<aura:component >
+    <aura:attribute name="selTabId" type="string" default="tab1" />
+    <div aura:id="dataentry">
+    	<lightning:tabset variant="default" selectedTabId="{!v.selTabId}">
+        	<lightning:tab label="Mobile" aura:id="tab1" tabindex="1" id="tab1" title="Mobile">
+            	<p>Samsung</p>
+                <p>Apple</p>
+                <p>One Plus</p>
+            </lightning:tab>
+            <lightning:tab label="Laptop" aura:id="tab2" tabindex="2" id="tab2" title="Laptop">
+            	<p>Dell</p>
+                <p>HP</p>
+                <p>Lenovo</p>
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+    <div class="slds-clearfix">
+        <div class="slds-float_left">
+            <lightning:button variant="neutral" label="Back" disabled="{!v.selTabId == 'tab1'}" onclick="{!c.back}" />
+        </div>
+        <div class="slds-float_right">
+            <lightning:button variant="neutral" label="Next" disabled="{!v.selTabId == 'tab2'}" onclick="{!c.next}" />
+        </div>
+    </div>
+</aura:component>

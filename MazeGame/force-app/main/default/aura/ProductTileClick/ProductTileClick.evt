@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Product tile Click">
+    <aura:attribute name="productId" type="string" /> 
+    <aura:attribute name="orderId" type="string" />
+</aura:event>

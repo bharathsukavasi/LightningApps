@@ -1,0 +1,26 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="ProductController" >
+    <aura:attribute name="products" type="Product2[]" />
+    <aura:attribute name="searchKeyHolder" type="string" />
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+    <div class="slds-card slds-var-p-around_x-small">
+    	<lightning:input 
+              label="Search key"  
+              type="text"
+              value="{!v.searchKeyHolder}"           
+              onchange="{!c.handleSearchKeyChange}"
+              class="search-bar">        
+        </lightning:input>
+        <div  class="slds-grid slds-wrap">
+        	<aura:if isTrue="{!v.products.length > 0}">
+        		<aura:iteration items="{!v.products}" var="prod">
+               		 <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                         <c:ProductTile product="{!prod}" orderId="{!v.recordId}" />
+                    </div>
+            	</aura:iteration>
+        		<aura:set attribute="else">
+                	There are no bikes.
+                </aura:set>
+        	</aura:if>
+        </div>        
+    </div>
+</aura:component>

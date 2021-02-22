@@ -1,124 +1,103 @@
-({      
-	loadNodes:function(component, event, helper){       
-		
-  		var nodeList = document.getElementById("nodeList");
+({
+	loadMaze : function(component, event, helper) {
+        var nodeList = document.getElementById("nodeList");
     	nodeList.innerHTML = '';
-        var rows=parseInt(component.find("rows").get("v.value"));
-        var cols=parseInt(component.find("cols").get("v.value"));
-        var divOpen;
-        for(var i=0;i<rows;i++)
-		{		
-		var col_id="col_"+i;
-		 divOpen = '<div aura:id="'+col_id+'" class="slds-grid slds-gutters">';
-		for(var j=0;j<cols;j++)
-		{
-		var row_id="div_row_"+i+"_"+j;
-		divOpen +='<div aura:id="'+row_id+'" id="'+row_id+'" data-id="'+row_id+'" class="slds-col custom-box needclick" ></div>'
-		}
-		divOpen += '</div>';            
-  		nodeList.innerHTML += divOpen ;
-		} 
+		var rows = parseInt(component.find("rows").get("v.value"));
+        var cols = parseInt(component.find("cols").get("v.value"));
+        var mazeDiv;
         
-                    component.set("v.EnableFindPath", true);
-                    //component.set("v.EnableGenerateMaze", false);
-        var addOnCLickEvent = component.get('c.addOnCLickEvent');
-        $A.enqueueAction(addOnCLickEvent);
+        for(var i=0; i<rows; i++){
+            var colId="col_"+i;
+            mazeDiv = '<div aura:id="'+colId+'" id="'+ colId +'" class="slds-grid slds-gutters">';
+            
+            for(var j=0; j<cols; j++){
+                var rowId = "div_row_" + i +"_" + j;
+                mazeDiv += '<div aura:id="' + rowId + '" id="'+ rowId +'" class="slds-col customBox needclick"></div>';                
+          }            
+           mazeDiv += '</div>'; 
+           nodeList.innerHTML += mazeDiv;
+        }
+        component.set("v.EnableFindPath", true);
+        var addOnClickEvent = component.get('c.addOnClickEvent');
+        $A.enqueueAction(addOnClickEvent);
+	},
+    addOnClickEvent: function(component, event, helper) {
+        var allDivs = document.querySelectorAll(".needclick");
+        for(var k=0; k<allDivs.length; k++){
+            let divTag = allDivs[k];
+            divTag.addEventListener('click', function() {
+                $A.util.toggleClass(divTag,"disabledBox");
+            });
+        }
     },
-    
- addOnCLickEvent:function(component, event, helper){
-     var alldivs =  document.querySelectorAll(".needclick");
-      for (let j = 0; j < alldivs.length; j++) {
-  let divtag = alldivs[j];
-  divtag.addEventListener('click', function() {
-     $A.util.toggleClass(divtag, "disabledBox");
-  });
-}
- },
-
-	
-    FindPath:function(component,event,helper){
-        
-        component.set("v.exceedLimts", false); 
-        component.set("v.noSolutions", false); 
-       var mazeString = '';                
+    FindPath : function(component, event, helper) {
+        var mazeString = '';
         var x = parseInt(component.find("rows").get("v.value"));
         var y = parseInt(component.find("cols").get("v.value"));
-        var disabledCell = /disabledBox/;
-        for(var i=0; i < x; i++)
-        {
-            for(var j = 0; j < y; j++)
-            {                
-                var divComponent = document.getElementById("div_row_"+ i + "_" + j);
-    
-                if(disabledCell.test(divComponent.className))
-                    mazeString += 'X';
-                else
-                    mazeString += '1';
+        
+        for(var i=0; i<x; i++){
+            for(var j=0; j <y; j++){
+                var divCmp = document.getElementById("div_row_" + i + "_" + j);                
+                mazeString += (divCmp.className.includes("disabledBox")) ? 'X' : '1';
             }
-            if(i == x)
-            	mazeString += '';
-            else
-                mazeString += ',';
+            mazeString += (i == x-1) ? '' : ',';
         }
-        var x0 = parseInt(component.find("sX").get("v.value")) - 1;
-        var y0 = parseInt(component.find("sY").get("v.value")) - 1;
-        var xf = parseInt(component.find("eX").get("v.value")) - 1;
-        var yf = parseInt(component.find("eY").get("v.value")) -1;
         
+        var sx = parseInt(component.find("sX").get("v.value")) - 1;
+        var sy = parseInt(component.find("sY").get("v.value")) - 1;
+        var ex = parseInt(component.find("eX").get("v.value")) - 1;
+        var ey = parseInt(component.find("eY").get("v.value")) - 1;
         
-        if (x0 >x || y0 > y || xf > x || yf > y ||(x0==xf && y0== yf)) {
-        component.set("v.exceedLimts", true); 
+        if (sx >x || sy > y || ex > x || ey > y ||(sx==ex && sy== ey)) {
+            alert('Starting or Ending Points not with in the Limits');
         }
         else
         {
         helper.GenerateMazeFromStringMaze(mazeString);
-       	helper.FindShortestPath(component, x, y, x0, y0, xf, yf);  
+       	helper.FindMazePath(component, x, y, sx, sy, ex, ey);  
+        // when the user changes the co ordinates and clicks the find path remove the
+        // highlighted cells
         var RemoveHightlightedPath = component.get('c.RemoveHightlightedPath');
         $A.enqueueAction(RemoveHightlightedPath);         
         
         var HightlightedPath = component.get('c.HightlightedPath');
         $A.enqueueAction(HightlightedPath);
 		}
-        
     },
-   HightlightedPath:function(component, event, helper)
-    {   
-    	var PathString = component.get("v.PathString");
-                  
+    
+    HightlightedPath:function(component, event, helper)
+    { 
+        var PathString = component.get("v.PathString");
+           // If PathString is empty show error else highlight the start, end and
+           //  the path cells       
          if(PathString == ''  || PathString == null || PathString == undefined)
-        {
-            component.set("v.noSolutions", true);
+        {            
+            alert('No possible Path found.');
 		}
         else{
-        var mazeSolutionArray = PathString.split(',');
-        for(var i=0; i<mazeSolutionArray.length-1; i++)
-        {
-            var divComponentId = "div_row_"+ mazeSolutionArray[i];
-            var divComponent = document.getElementById(divComponentId);
-            $A.util.addClass(divComponent, 'highlightCell');            
-        }
-              
-		var startX = parseInt(component.find("sX").get("v.value")) - 1;
-        var startY = parseInt(component.find("sY").get("v.value")) - 1;
-        var endX = parseInt(component.find("eX").get("v.value")) - 1;
-        var endY = parseInt(component.find("eY").get("v.value")) -1; 
-        
-        var divSourceComponentId = "div_row_"+ startX + "_" + startY;
-        var divSourceComponent = document.getElementById(divSourceComponentId);
-        $A.util.addClass(divSourceComponent, 'sourceCell'); 
-        //divSourceComponent.innerHTML = 'Source Point';
-        
-        var divDestinationComponentId = "div_row_"+ endX + "_" + endY;
-        var divDestComponent = document.getElementById(divDestinationComponentId);
-        $A.util.addClass(divDestComponent, 'destinationCell');
-        //divDestComponent.innerHTML = 'DestinationPoint';
-        
-
-        }
-   },
-    RemoveHightlightedPath: function(component, event, helper){
-     
-        
+            // Highlight the path cells with yellow color
+        	var mazeSolutionArray = PathString.split(',');
+            for(var i=0; i<mazeSolutionArray.length-1; i++)
+            {
+                var divComponentId = "div_row_"+ mazeSolutionArray[i];
+                var divComponent = document.getElementById(divComponentId);
+                $A.util.addClass(divComponent, 'highlightCell');            
+            }              
+            var startX = parseInt(component.find("sX").get("v.value")) - 1;
+            var startY = parseInt(component.find("sY").get("v.value")) - 1;
+            var endX = parseInt(component.find("eX").get("v.value")) - 1;
+       	 	var endY = parseInt(component.find("eY").get("v.value")) -1; 
+        	// Highlight the start cell with green color
+            var divSourceComponentId = "div_row_"+ startX + "_" + startY;
+            var divSourceComponent = document.getElementById(divSourceComponentId);
+            $A.util.addClass(divSourceComponent, 'sourceCell'); 
+            // Highlight the end cell with red color
+            var divDestinationComponentId = "div_row_"+ endX + "_" + endY;
+            var divDestComponent = document.getElementById(divDestinationComponentId);
+            $A.util.addClass(divDestComponent, 'destinationCell');
+    	}
+    },
+    RemoveHightlightedPath: function(component, event, helper){ 
         var rows=parseInt(component.find("rows").get("v.value"));
         var cols=parseInt(component.find("cols").get("v.value"));
         
@@ -126,12 +105,12 @@
         {
             for(var j = 0; j < cols; j++)
             {                  
-        	var divComponent = document.getElementById("div_row_"+ i + "_" + j);
-                     
-            $A.util.removeClass(divComponent, 'highlightCell'); 
-            $A.util.removeClass(divComponent, 'sourceCell');                 
-            $A.util.removeClass(divComponent, 'destinationCell');   
+        		var divComponent = document.getElementById("div_row_"+ i + "_" + j);                     
+                $A.util.removeClass(divComponent, 'highlightCell'); 
+                $A.util.removeClass(divComponent, 'sourceCell');                 
+                $A.util.removeClass(divComponent, 'destinationCell');
                 divComponent.innerHTML ="";
-            }}
+            }
+        }
     }
-    })
+})

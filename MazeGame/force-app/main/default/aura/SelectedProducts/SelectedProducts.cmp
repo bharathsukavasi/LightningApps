@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="OrdersController">
+    <aura:handler event="c:ProductTileClick" action="{!c.handleProductclick}" />
+    <aura:handler name="QuantityChange" event="c:QuantityChange" action="{!c.handleQuantityChange}" />
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+    <aura:attribute name="selectedProductIds" type="string[]" />
+    <aura:attribute name="OrderItems" type="Order_Item__c[]" />
+    <aura:attribute name="orderSummary" type="OrderSummary" />
+    <div>
+    	<aura:if isTrue="{!v.OrderItems.length > 0}">
+        	<header class="slds-text-heading_small">
+                <div>
+                    Order Total:
+                    <lightning:formattedNumber
+                        value="{!v.orderSummary.orderTotal}"
+                        style="currency"
+                        currencyCode="USD"
+                        class="ordertotal"
+                    ></lightning:formattedNumber>
+                </div>
+                <div class="right">Total Items: {!v.orderSummary.totalItems}</div>
+            </header>
+        </aura:if>
+    </div>
+    <div class="slds-card slds-var-p-around_x-small">
+        <div class="slds-grid slds-wrap">
+        	<aura:if isTrue="{!v.OrderItems.length > 0}">
+        	<aura:iteration items="{!v.OrderItems}" var="orderitem">  
+                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                	<c:ProductCard orderItem="{!orderitem}" />
+                </div>                
+        	</aura:iteration>
+            <aura:set attribute="else">
+            	<strong>There are no selected products.</strong>
+            </aura:set>
+        </aura:if>
+        </div>
+        
+    	
+    </div>
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <div class="slds-theme_default slds-p-around_xx-small slds-tabs_card">
+	<lightning:carousel disableAutoRefresh="false" disableAutoScroll="false">
+        <lightning:carouselImage
+                                
+            src = "https://www.drivespark.com/images/2020-05/bmw-8-series-gran-coupe-exterior-11.jpg"
+            header = "BMW 8 Series"
+            description = "BMW 8 Series Gran Coupe"
+            alternativeText = "BMW 8 Series Gran Coupe"
+            href = "https://www.drivespark.com/images/2020-05/bmw-8-series-gran-coupe-exterior-11.jpg">
+        </lightning:carouselImage>
+        <lightning:carouselImage
+            src = "https://m.media-amazon.com/images/I/61aBP5iXrSL._SL1310_.jpg"
+            header = "BMW Super car"
+            description = "Super Car Edition"
+            alternativeText = "Super Car Edition"
+            href = "https://m.media-amazon.com/images/I/61aBP5iXrSL._SL1310_.jpg">
+        </lightning:carouselImage>
+        <lightning:carouselImage
+            src = "https://imgd.aeplcdn.com/0x0/n/cw/ec/41406/bmw-8-series-right-front-three-quarter8.jpeg"
+            header = "Third Card"
+            description = "BMW 8 Series 2nd Version"
+            alternativeText = "BMW 8 Series 2nd Version"
+            href = "https://imgd.aeplcdn.com/0x0/n/cw/ec/41406/bmw-8-series-right-front-three-quarter8.jpeg">
+        </lightning:carouselImage>
+    </lightning:carousel>
+        </div>
+</aura:component>

@@ -1,0 +1,50 @@
+.content.THIS {
+    padding: 8px 8px 12px 8px;
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 0.25rem;
+}
+
+.THIS img.product {
+    height: 120px;
+    max-width: initial;
+}
+
+.title.THIS {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.quantity.THIS {
+    width: 20px;
+    margin: 0 2px;
+}
+
+.price.THIS {
+    width: 24px;
+    margin: 0 2px;
+}
+
+.form.THIS {
+    display: flex;
+}
+
+.savebutton.THIS {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.delete-button.THIS {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+
+.THIS.content:hover .delete-button {
+    display: inherit;
+}
+.THIS.Save {
+    margin: 30px 10px 10px 10px !Important;
+}

@@ -1,26 +1,10 @@
-.THIS .custom-box {
-	border: 1px solid grey;
+.THIS .customBox{
+    border: 1px solid grey;
     height:2rem;
-}
-.THIS .divblock {
-	
-    border: 2px solid green; 
- 	padding:6px;
-    height: 25rem;
-    
-}
-.THIS.c-container {
-    margin: 10px 0 20px 20px;
-    height: 25rem;
-    width: 30rem;
 }
 .THIS .disabledBox {	
 	background-color: lightgrey;
 }
-.THIS.buttonPadding{
-    margin: 0.5rem 0 0 0.5rem;
-}
-
 .THIS .highlightCell{
     background-color: yellow;
 }

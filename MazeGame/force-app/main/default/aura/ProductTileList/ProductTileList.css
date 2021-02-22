@@ -1,0 +1,13 @@
+.slds-card.THIS {
+    background: rgb(243, 242, 242);
+}
+
+.search-bar.THIS {
+    display: block;
+    margin: 0 0.5rem 0.3rem 0.5rem;
+}
+
+.content.THIS {
+    display: flex;
+    flex-wrap: wrap;
+}

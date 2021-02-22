@@ -1,0 +1,30 @@
+<aura:component controller="AccountController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:appHostable" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+    <aura:attribute name="fields" type="List" />
+    <aura:attribute name="object" type="list" />
+    <aura:attribute name="property" type="string" />
+    <aura:attribute name="objectColumns" type="List" 
+                    default="[{label:'Name', value:'Name'},
+                             {label:'Id', value:'Id'}]" /> 
+    <div class="slds-input slds-p-bottom_medium">
+    
+        <lightning:input aura:id="nameFilter" class="searchbox"
+                         label="Search" 
+                         onchange="{!c.handleNameChange}" />
+    
+        <lightning:combobox name="FilterProperty" class="searchbox"
+                         label="Properties" 
+                          options="{!v.objectColumns}"
+                            onchange="{!c.handleChange}"/>
+        
+        </div>
+    <div class="slds-grid slds-p-around_small">
+    <lightning:datatable keyField="Id"
+                         data="{!v.object}"
+                         columns="{!v.fields}"
+                         showRowNumberColumn="true"
+                         onrowaction="{!c.updateSelectedText}"/>
+    </div>
+    <div>   
+        </div>
+</aura:component>
