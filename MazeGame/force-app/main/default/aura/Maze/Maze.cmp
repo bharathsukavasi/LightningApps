@@ -74,7 +74,7 @@
             	</div>
                <div class="slds-size_2-of-2 slds-text-align_center slds-p-top_medium">
                    <lightning:button label="Find Path" variant="brand" onclick="{!c.FindPath}" />
-                   <lightning:button label="Clear" variant="brand" onclick="{!c.RemoveHightlightedPath}" />
+                   <lightning:button label="Clear" variant="brand" onclick="{!c.ClearHighLightedpath}" />
                </div>               
        		</div>
      	</div>
